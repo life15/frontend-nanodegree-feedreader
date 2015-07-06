@@ -63,15 +63,12 @@ $(function() {
     describe('Initial Entries', function() {
         // asynchronous test
         beforeEach(function(done) {
-            loadFeed(0, function() {
-                done();
-            });
+            loadFeed(0, done);
         });
 
         // at least a single .entry element within the .feed container
-        it('at least a single .entry element', function(done) {
-            expect($('.entry').length).not.toEqual(0);
-            done()
+        it('at least a single .entry element', function() {
+            expect($('.feed .entry').length).not.toEqual(0);
         });
     });
 
@@ -79,22 +76,21 @@ $(function() {
     describe('New Feed Selection', function() {
         var oldEntry,
             newEntry;
-        oldEntry = $('.entry');
 
         // asynchronous test
         beforeEach(function(done) {
             loadFeed(0, function() {
-                newEntry = $('.entry');
-                done();
+                oldEntry = $('.feed .entry');
             });
+            loadFeed(0, function() {
+                newEntry = $('.feed .entry');
+                done()
+            })
         });
 
         // the feed content actually changes
-        it('content changes', function(done) {
-            console.log(newEntry);
-            console.log(oldEntry);
+        it('content changes', function() {
             expect((oldEntry == newEntry)).toBe(false);
-            done();
         });
     });
 }());
