@@ -23,7 +23,7 @@ $(function() {
                 expect(allFeeds[i].url).not.toBeUndefined();
                 expect(allFeeds[i].url.length).not.toBe(0);
             }
-         });
+        });
 
         // allFeeds has a name defined and is not empty
         it('Names are not empty', function() {
@@ -81,11 +81,11 @@ $(function() {
         beforeEach(function(done) {
             loadFeed(0, function() {
                 oldEntry = $('.feed .entry');
+                loadFeed(1, function() {
+                    newEntry = $('.feed .entry');
+                    done();
+                });
             });
-            loadFeed(0, function() {
-                newEntry = $('.feed .entry');
-                done()
-            })
         });
 
         // the feed content actually changes
